@@ -1,6 +1,8 @@
 const { join } = require("path")
+const packageConfig = require('./package.json');
 
 module.exports = {
+  displayName: packageConfig.name,
   preset: "ts-jest",
   moduleNameMapper: {
     '^@project$': '<rootDir>/src'

@@ -2,11 +2,10 @@ import React, { ReactElement, useCallback } from 'react'
 import styled from 'styled-components'
 import { useTranslation } from 'react-i18next'
 import { useQuery, gql } from '@apollo/client'
-import Bugsnag from '@bugsnag/js'
 import { ErrorBoundary } from '@spotifood/ui'
 import { PlaylistBox, Loader } from './components'
 import { PlaylistType } from './types'
-import { GlobalConstants } from './utils'
+import { GlobalConstants, logOnBugsnag } from './utils'
 
 export const GET_PLAYLISTS = gql(`
   query playlists(
@@ -78,11 +77,24 @@ interface PlaylistsProps {
   countries?: string[];
   limit?: number;
   offset?: number;
+  logError?: (error: Error) => void;
 }
 
 export function Playlists(props: PlaylistsProps): ReactElement {
-  const { search, limit, offset, countries } = props
-  const { loading, error, data, refetch } = useQuery(
+  const {
+    logError = logOnBugsnag,
+    search,
+    limit,
+    offset,
+    countries
+  } = props
+
+  const {
+    loading,
+    error,
+    data,
+    refetch
+  } = useQuery(
     GET_PLAYLISTS,
     {
       variables: { search, limit, offset, countries },
@@ -90,7 +102,11 @@ export function Playlists(props: PlaylistsProps): ReactElement {
     }
   )
 
-  const onError = useCallback(() => Bugsnag.notify(new Error(error?.message)), [error])
+  const onError = useCallback(() => {
+    if (error) {
+      logError(error)
+    }
+  }, [error, logError])
   const onAction = useCallback(() => refetch(), [refetch])
 
   const { t } = useTranslation('playlists')

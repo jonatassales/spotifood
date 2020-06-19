@@ -16,9 +16,9 @@ import {
 
 function Loader(): ReactElement {
   return (
-    <PlaylistsContainer>
+    <PlaylistsContainer data-testid="PlaylistsLoader">
       {
-        Array(8).fill(true).map((_value, index) => (
+        Array(8).fill({}).map((_value, index) => (
           <Container
             key={index}
             width="fit-content"
@@ -32,7 +32,7 @@ function Loader(): ReactElement {
               <PlaylistTitle />
               <PlaylistDescription />
               <TracksList>
-                {Array(4).fill(true).map((_value, index) => (
+                {Array(4).fill({}).map((_value, index) => (
                   <TrackContainer key={index}>
                     <AlbumImage
                       width="56px"

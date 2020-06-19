@@ -21,6 +21,7 @@
     "@spotifood/ui": "^0.0.1",
     "graphql": "14.6.0",
     "react": "^16.13.0",
+    "react-dom": "^16.13.1",
     "react-i18next": "^11.5.1",
     "styled-components": "^5.0.1"
   },

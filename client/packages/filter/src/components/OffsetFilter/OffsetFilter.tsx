@@ -59,7 +59,7 @@ export default function OffsetFilter(): ReactElement {
     >
       <FilterTitle>{t('pagefromto', { from: currentPage, to: pagesNumber })}</FilterTitle>
       <Container>
-        {Array(pagesNumber).fill(null).map((_value, index: number) => {
+        {Array(pagesNumber).fill({}).map((_value, index: number) => {
           const page = index + 1
           return (
             <Tag
