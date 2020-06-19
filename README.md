@@ -1,5 +1,5 @@
 # Spotifood
-[![CircleCI](https://circleci.com/gh/jonatassales/spotifood.svg?style=svg&circle-token=cf99a9606a2109f9493da2960b8e60e824cca7c3)](https://circleci.com/gh/jonatassales/spotifood)
+[![CircleCI](https://circleci.com/gh/jonatassales/spotifood.svg?style=svg&circle-token=69249669c1948c23f2926277b4aa1f0d186be3e7)](https://circleci.com/gh/jonatassales/spotifood)
 
 ## Disclaimer
 This project is an experiment that put in practice some cutting edge architectural approaches such as Microfrontends, Monorepos and GraphQL BFFs. I don't personally believe that you should implement those architectures in a prototype or even start a new project with it. There are several downsides involving microfronted compositions from performance to tooling complexity (which I have faced during the development process).
