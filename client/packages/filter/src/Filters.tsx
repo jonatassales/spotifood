@@ -1,15 +1,14 @@
 import React, { ReactElement, useCallback } from 'react'
 import styled, { useTheme } from 'styled-components'
 import { useTranslation } from 'react-i18next'
-import Bugsnag from '@bugsnag/js'
 import { useMediaQuery } from 'react-responsive'
 import { useQuery, gql } from '@apollo/client'
 import { Text, ErrorBoundary } from '@spotifood/ui'
 import { SearchBox, FilterBox, Loader } from './components'
 import { FilterType } from './types'
-import { GlobalConstants } from './utils'
+import { GlobalConstants, logOnBugsnag } from './utils'
 
-const GET_FILTERS = gql(`
+export const GET_FILTERS = gql(`
   {
     filters {
       id
@@ -59,12 +58,29 @@ const FilterText = styled(Text)`
   margin-right: 10px;
 `
 
-export default function Filters(): ReactElement {
-  const { loading, error, data, refetch } = useQuery(GET_FILTERS, { pollInterval: GlobalConstants.refetchInterval })
+interface FilterProps {
+  logError?: (error: Error) => void;
+}
+
+export function Filters(props: FilterProps): ReactElement {
+  const { logError = logOnBugsnag } = props
+  const {
+    loading,
+    error,
+    data,
+    refetch
+  } = useQuery(GET_FILTERS, { pollInterval: GlobalConstants.refetchInterval })
+
   const theme = useTheme()
   const isMobile = useMediaQuery({ query: `(max-width: ${theme.filter.breakpoints.small})` })
-  const onError = useCallback(() => Bugsnag.notify(new Error(error?.message)), [error])
+
+  const onError = useCallback(() => {
+    if (error) {
+      logError(error)
+    }
+  }, [error, logError])
   const onAction = useCallback(() => refetch(), [refetch])
+
   const { t } = useTranslation('filter')
 
   if (loading) return <Loader />

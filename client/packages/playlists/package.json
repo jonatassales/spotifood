@@ -9,7 +9,6 @@
     "build": "yarn build:source && yarn build:tests",
     "build:source": "tsc -p tsconfig.build.json",
     "build:tests": "tsc -p tsconfig.tests.json",
-    "storybook": "start-storybook",
     "test": "jest",
     "test:watch": "jest --watch"
   },

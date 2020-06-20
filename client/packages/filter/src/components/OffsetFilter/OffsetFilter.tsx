@@ -9,7 +9,7 @@ import useOffset from './useOffset'
 import { Loader } from '../Loader'
 import { Container } from './styles'
 
-const GET_PLAYLISTS_TOTAL = gql(`
+export const GET_PLAYLISTS_TOTAL = gql(`
   {
     playlists {
       total

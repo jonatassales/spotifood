@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 import { ApolloClient, HttpLink, InMemoryCache, ApolloProvider } from '@apollo/client'
 import Bugsnag from '@bugsnag/js'
-import Filters from './Filters'
+import { Filters } from './Filters'
 import { FilterTheme } from './theme'
 
 /**

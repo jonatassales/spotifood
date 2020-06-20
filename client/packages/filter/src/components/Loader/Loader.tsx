@@ -7,7 +7,7 @@ function Loader(): ReactElement {
   const theme = useTheme()
   const isMobile = useMediaQuery({ query: `(max-width: ${theme.filter.breakpoints.small})` })
   return (
-    <Container>
+    <Container data-testid="FiltersLoader">
       {isMobile ? (
         <MobileBar />
       ) : (

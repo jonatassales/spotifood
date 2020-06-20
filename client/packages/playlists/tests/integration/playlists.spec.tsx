@@ -5,7 +5,7 @@ import { Playlists } from '../../src/Playlists'
 import { TestProviders } from '../utils'
 import { querySearchedPlaylists, queryWithError } from '../mocks';
 
-describe('Playlists', () => {
+describe('when fetching playlists', () => {
 
   afterEach(cleanup) 
 
